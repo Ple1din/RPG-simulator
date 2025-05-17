@@ -1,64 +1,76 @@
 # RPG-simulator
-# 📚 Simulador de Personajes de Videojuego (Estilo RPG)
+# 📚 Video Game Character Simulator (RPG Style)
 
-Este proyecto es un simulador de personajes basado en la lógica de los videojuegos estilo RPG. Permite aplicar los principios de la Programación Orientada a Objetos (POO), como herencia, polimorfismo, sobrecarga de operadores y manejo de excepciones, siguiendo las buenas prácticas de estilo PEP8.
+This project is a character simulator based on RPG-style video game logic. It allows you to apply Object-Oriented Programming (OOP) principles, such as inheritance, polymorphism, operator overloading, and exception handling, following good practices.
+### 🎮 **Context**
+In role-playing video games (RPGs), characters possess attributes, abilities, and items that define their behavior in combat. This simulator allows these interactions to be modeled, facilitating the understanding of key OOP concepts. It also simulates battles between characters by applying comparisons and status restrictions, such as health and weapon availability.
 
-### 🎮 **Contexto**
-En los videojuegos de rol (RPG), los personajes poseen atributos, habilidades y objetos que definen su comportamiento en combate. Este simulador permite modelar estas interacciones, facilitando la comprensión de conceptos clave de POO. Además, simula batallas entre personajes aplicando comparaciones y restricciones de estado, como la vida y la disponibilidad de armas.
+### 📌 **Justification**
+This project is interesting because it allows you to observe how theoretical OOP concepts are applied in practical and engaging scenarios. It also encourages the writing of clean, reusable, and secure code, improving modular design and error handling skills.
 
-### 📌 **Justificación**
-Este proyecto es interesante porque permite observar cómo los conceptos teóricos de la POO se aplican en escenarios prácticos y atractivos. Además, fomenta la escritura de código limpio, reutilizable y seguro, mejorando las habilidades de diseño modular y manejo de errores.
+### 🛠️ **Class Structure and Relationships**
 
-### 🛠️ **Estructura de Clases y Relaciones**
+#### **Abstract Class: Character**
+- Attributes:
+  - `# name: str`
+  - `# health: int`
+  - `# strength: int`
+  - `# inventory: list<Weapon*>`
+- Methods:
+  - `+ attack(Character)` (abstracto)
+  - `+ equipWeapon(Weapon)`
+  - `+ heal()`
+  - `+ blockAttack()`
+  - `+ getName()`
+  - `+ setName(string)`
+  - `+ getHealth()`
+  - `+ setHealth(int)`
+  - `+ getStrength()`
+  - `+ setStrength(int)`
+  - `+ getInventory()`
+  - `+ setInventory(list<Weapon*>)`
 
-#### **Clase Abstracta: Personaje**
-- Atributos:
-  - `+ nombre: str`
-  - `+ vida: int`
-  - `+ fuerza: int`
-  - `+ inventario: list`
-- Métodos:
-  - `+ atacar(objetivo)` (abstracto)
-  - `+ equipar_arma(arma)`
-  - `+ __gt__(otro)` (sobrecarga operador `>`)
-  - `+ __lt__(otro)` (sobrecarga operador `<`)
+**Description**: Abstract base class that defines attributes and behaviors common to all characters. This class is inherited by `Warrior`, `Mage`, and `Archer`.
 
-**Descripción**: Clase base abstracta que define los atributos y comportamientos comunes a todos los personajes. Esta clase es heredada por `Guerrero`, `Mago` y `Arquero`.
+#### **Class: Warrior**
+- Inherits from: `Character`
+- Methods:
+  - `+ attack(Character)`
 
-#### **Clase: Guerrero**
-- Hereda de: `Personaje`
-- Métodos:
-  - `+ atacar(objetivo)`
+**Description**: This class inherits from `Character` and implements its own attack logic based on physical strength. It is an aggregator of the `Weapon` class.
 
-**Descripción**: Esta clase hereda de `Personaje` e implementa su propia lógica de ataque basada en fuerza física. Hace agregación a la clase `Arma`.
+#### **Class: Wizard**
+- Inherits from: `Character`
+- Methods:
+  - `+ attack(Character)`
 
-#### **Clase: Mago**
-- Hereda de: `Personaje`
-- Métodos:
-  - `+ atacar(objetivo)`
+**Description**: This class inherits from `Character` and implements attacks with increased magic damage. It is an add-on to the `Weapon` class.
 
-**Descripción**: Esta clase hereda de `Personaje` e implementa ataques con incremento de daño mágico. Hace agregación a la clase `Arma`.
+#### **Class: Archer**
+- Inherits from: `Character`
+- Methods:
+  - `+ attack(Character)`
 
-#### **Clase: Arquero**
-- Hereda de: `Personaje`
-- Métodos:
-  - `+ atacar(objetivo)`
+**Description**: This class inherits from `Character` and implements ranged attacks. It is an add-on to the `Weapon` class.
 
-**Descripción**: Esta clase hereda de `Personaje` e implementa ataques a distancia. Hace agregación a la clase `Arma`.
+#### **Class: Weapon**
+- Attributes:
+  - `- name: str`
+  - `- damage: int`
+- Methods:
+  - `+ attack(Character)`
+  - `+ getName()`
+  - `+ setName(str)`
+  - `+ getDamage()`
+  - `+ setDamage(int)`
 
-#### **Clase: Arma**
-- Atributos:
-  - `+ nombre: str`
-  - `+ danio: int`
+**Description**: Represents the weapons that characters can use. This class does not inherit from any other class, but is related by aggregation to `Character`.
 
-**Descripción**: Representa las armas que pueden usar los personajes. Esta clase no hereda de ninguna, pero está relacionada por agregación con `Personaje`.
+#### **Custom Exceptions**
+- `InsufficientHealthError`: Thrown when a character attempts to attack with low or no health.
+- `NoWeaponError`: Thrown when a character attempts to attack without having a weapon equipped.
 
-#### **Excepciones Personalizadas**
-- `VidaInsuficienteError`: Se lanza cuando un personaje intenta atacar con poca vida.
-- `SinArmaError`: Se lanza cuando un personaje intenta atacar sin haber equipado un arma.
-
-### 📈 **Funcionalidades Implementadas**
-- Herencia y Polimorfismo: Clases `Guerrero`, `Mago` y `Arquero` heredan de `Personaje` e implementan su propia versión del método `atacar`.
-- Sobrecarga de Operadores: Se sobrecargan los operadores `>` y `<` para comparar la fuerza entre personajes.
-- Manejo de Excepciones: Uso de clases personalizadas para controlar errores lógicos.
-- Agregación: `Personaje` contiene una lista de objetos `Arma` en su inventario.
+### 📈 **Implemented Features**
+- Inheritance and Polymorphism: The `Warrior`, `Mage`, and `Archer` classes inherit from `Character` and implement their own version of the `attack` method.
+- Exception Handling: Use methods to handle logic errors.
+- Aggregation: `Character` contains a list of `Weapon` items in its inventory.
