@@ -16,6 +16,7 @@ This project is interesting because it allows you to observe how theoretical OOP
   - `# health: int`
   - `# strength: int`
   - `# inventory: list<Weapon*>`
+  - `# weapon: Weapon`
 - Methods:
   - `+ attack(Character)` (abstracto)
   - `+ equipWeapon(Weapon)`
@@ -29,6 +30,8 @@ This project is interesting because it allows you to observe how theoretical OOP
   - `+ setStrength(int)`
   - `+ getInventory()`
   - `+ setInventory(list<Weapon*>)`
+  - `+ getWeapon()`
+  - `+ setWeapon(Weapon)`
 
 **Description**: Abstract base class that defines attributes and behaviors common to all characters. This class is inherited by `Warrior`, `Mage`, and `Archer`.
 
