@@ -77,3 +77,4 @@ This project is interesting because it allows you to observe how theoretical OOP
 - Inheritance and Polymorphism: The `Warrior`, `Mage`, and `Archer` classes inherit from `Character` and implement their own version of the `attack` method.
 - Exception Handling: Use methods to handle logic errors.
 - Aggregation: `Character` contains a list of `Weapon` items in its inventory.
+![RPG-simulator](https://github.com/user-attachments/assets/3aab9e2c-5f3c-440e-9753-0760cacbd950)
