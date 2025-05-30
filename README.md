@@ -69,7 +69,8 @@ This project is interesting because it allows you to observe how theoretical OOP
 
 **Description**: Represents the weapons that characters can use. This class does not inherit from any other class, but is related by aggregation to `Character`.
 
-![RPG-simulator](https://github.com/user-attachments/assets/aaf6c56d-d5b0-46d2-a10b-3cd60769dcd1)
+![RPG drawio](https://github.com/user-attachments/assets/c74440d9-1fc3-4931-8d6e-fe4207476d89)
+
 
 #### **Custom Exceptions**
 - `InsufficientHealthError`: Thrown when a character attempts to attack with low or no health.
