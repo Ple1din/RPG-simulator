@@ -65,3 +65,12 @@ Independent class that represents a weapon. Each weapon has a type (sword, staff
 - Aggregation: Character has a list of Weapon pointers, which can be equipped and queried.
 
 - Abstract classes: Character encapsulates common behaviors, leaving specific details to subclasses.
+
+Personal Conclusion
+
+This project allowed me to consolidate my understanding of object-oriented programming by applying it in a meaningful and engaging context. Designing a character simulator from scratch helped me think critically about class relationships, data encapsulation, inheritance, and polymorphism. Through this process, I not only practiced using abstract classes and method overloading/overriding, but also understood how to apply these tools to solve real problems in software design.
+
+Implementing the combat system, inventory management, and dynamic character behaviors showed me the importance of flexibility and code reusability. I also improved my input validation techniques and became more conscious of memory management, especially when working with pointers.
+
+Overall, I am satisfied with the final result. The system works as intended, is easy to extend, and provides a clear demonstration of the core competencies expected in this challenge. I now feel more confident in applying object-oriented principles in larger, more complex projects.
+
