@@ -1,67 +1,63 @@
-#include "Character.h"
-#include <iostream>
+#include <utility>
 
-Character::Character(const std::string& name, int health, int strength)
-    : name(name), health(health), strength(strength), weapon(nullptr) {}
+#include "include/Character.h"
+#include "include/Weapon.h"
+#include "iostream"
 
-void Character::equipWeapon(Weapon* newWeapon) {
-    weapon = newWeapon;
-    std::cout << name << " equipped " << (weapon ? weapon->getName() : "no weapon") << std::endl;
+Character::Character(std::string name, const double health, Weapon* weapon)
+    : name(std::move(name)), health(health), weapon(weapon) {}
+
+std::string Character::blockAttack() {
+    return "blocked";
 }
 
-void Character::heal() {
-    health += 10;
-    std::cout << name << " healed 10 health points. Total health: " << health << std::endl;
+std::string Character::equipWeapon(const int index) {
+    std::string message;
+    if (index > 0 && index < inventory.size()+1) {
+        auto it = inventory.begin();
+        std::advance(it, index - 1);
+        this->weapon = *it;
+        message = "Weapon equipped";
+        return message;
+    }
+    message = "Invalid index for your inventory";
+    return message;
 }
 
-void Character::blockAttack() {
-    std::cout << name << " blocked the attack!" << std::endl;
-}
-
-std::string Character::getName() const {
+std::string Character::getName() {
     return name;
 }
 
-void Character::setName(const std::string& name) {
-    this->name = name;
+void Character::setName(std::string name) {
+    this->name = std::move(name);
 }
 
-int Character::getHealth() const {
+double Character::getHealth() const {
     return health;
 }
 
-void Character::setHealth(int health) {
-    this->health = health < 0 ? 0 : health;
-}
-
-int Character::getStrength() const {
-    return strength;
-}
-
-void Character::setStrength(int strength) {
-    this->strength = strength;
-}
-
-std::vector<Weapon*> Character::getInventory() const {
-    std::vector<Weapon*> weapons;
-    for (const auto& w : inventory) {
-        weapons.push_back(w.get());
-    }
-    return weapons;
-}
-
-void Character::addWeaponToInventory(std::unique_ptr<Weapon> newWeapon) {
-    inventory.push_back(std::move(newWeapon));
-}
-
-void Character::setInventory(std::vector<std::unique_ptr<Weapon>>&& newInventory) {
-    inventory = std::move(newInventory);
+void Character::setHealth(const double health) {
+    this->health = health;
 }
 
 Weapon* Character::getWeapon() const {
     return weapon;
 }
 
-void Character::setWeapon(Weapon* newWeapon) {
-    weapon = newWeapon;
+void Character::setWeapon(Weapon* weapon) {
+    this->weapon = weapon;
+}
+
+std::list<Weapon*> Character::getInventory() const {
+    return inventory;
+}
+
+void Character::setInventory(std::list<Weapon*> inventory) {
+    this->inventory = std::move(inventory);
+}
+
+
+Character& Character::operator+(Weapon* weapon) {
+    this->inventory.push_back(weapon);
+    return *this;
 }

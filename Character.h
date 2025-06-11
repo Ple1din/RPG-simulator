@@ -1,54 +1,40 @@
+// Character.h
 #ifndef CHARACTER_H
 #define CHARACTER_H
 
 #include <string>
-#include <vector>
-#include <memory>
+#include <list>
 #include "Weapon.h"
 
 class Character {
 protected:
     std::string name;
-    int health;
-    int strength;
-    std::vector<std::unique_ptr<Weapon>> inventory;
-    Weapon* weapon;  // Currently equipped weapon (not owning)
+    double health;
+    std::list<Weapon*> inventory;
+    Weapon* weapon;
 
 public:
-    Character(const std::string& name = "", int health = 100, int strength = 10);
 
-    // Virtual destructor for proper cleanup of derived classes
-    virtual ~Character() = default;
+    Character(std::string name, double health, Weapon* weapon);
 
-    // Pure virtual method to force derived classes to implement attack
-    virtual void attack(Character& target) = 0;
+    virtual std::string attack(Character& character) = 0;
+    virtual std::string showStats() const = 0;
+    virtual std::string showInventory() const = 0;
 
-    // Equip a weapon from inventory (pointer to Weapon)
-    virtual void equipWeapon(Weapon* newWeapon);
-
-    // Heal self by fixed amount
-    virtual void heal();
-
-    // Block an attack (simple example)
-    virtual void blockAttack();
-
-    // Getters and setters
-    std::string getName() const;
-    void setName(const std::string& name);
-
-    int getHealth() const;
-    void setHealth(int health);
-
-    int getStrength() const;
-    void setStrength(int strength);
-
-    // Inventory management
-    std::vector<Weapon*> getInventory() const; // returns raw pointers (non-owning)
-    void addWeaponToInventory(std::unique_ptr<Weapon> newWeapon);
-    void setInventory(std::vector<std::unique_ptr<Weapon>>&& newInventory);
-
+    static std::string blockAttack();
+    std::string equipWeapon(int index);
+    std::string getName();
+    void setName(std::string name);
+    double getHealth() const;
+    void setHealth(double health);
     Weapon* getWeapon() const;
-    void setWeapon(Weapon* newWeapon);
+    void setWeapon(Weapon* weapon);
+    std::list<Weapon*> getInventory() const;
+    void setInventory(std::list<Weapon*> inventory);
+    Character& operator+(Weapon* weapon);
+
+
+    virtual ~Character() = default;
 };
 
-#endif // CHARACTER_H
+#endif

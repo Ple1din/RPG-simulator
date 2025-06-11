@@ -1,22 +1,24 @@
-#include "Weapon.h"
-#include "Character.h"
+#include <utility>
 
-Weapon::Weapon(const std::string& name, int damage) : name(name), damage(damage) {}
+#include "include/Weapon.h"
 
-
-
-std::string Weapon::getName() const {
-    return name;
+Weapon::Weapon(std::string type, const int damage) {
+    this->type = std::move(type);
+    this->damage = damage;
 }
 
-void Weapon::setName(const std::string& name) {
-    this->name = name;
+std::string Weapon::getType() {
+    return type;
+}
+
+void Weapon::setType(std::string type) {
+    this->type = std::move(type);
 }
 
 int Weapon::getDamage() const {
     return damage;
 }
 
-void Weapon::setDamage(int damage) {
+void Weapon::setDamage(const int damage) {
     this->damage = damage;
 }

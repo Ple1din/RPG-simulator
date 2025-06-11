@@ -1,16 +1,28 @@
+// Wizard.h
 #ifndef WIZARD_H
 #define WIZARD_H
 
 #include "Character.h"
 
-class Wizard : public Character {
+class Wizard final : public Character {
+private:
+    double magic;
+    int magicPenetration;
+
 public:
-    using Character::Character;
+    Wizard(std::string name, double health, Weapon* weapon, double magic, int magicPenetration);
 
-    void attack(Character& target) override;
+    std::string attack(Character& character) override;
+    std::string attack(Character& character, Weapon& weapon) const;
+    std::string meditate();
 
-    // Overloaded attack with magic power
-    void attack(Character& target, int magicPower);
+    double getMagic() const;
+    void setMagic(double magic);
+    int getMagicPenetration() const;
+    void setMagicPenetration(int magicPenetration);
+
+    std::string showStats() const override;
+    std::string showInventory() const override;
 };
 
-#endif // WIZARD_H
+#endif

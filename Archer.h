@@ -1,16 +1,28 @@
+// Archer.h
 #ifndef ARCHER_H
 #define ARCHER_H
 
 #include "Character.h"
 
-class Archer : public Character {
+class Archer final : public Character {
+private:
+    double agility;
+    int penetration;
+
 public:
-    using Character::Character;
+    Archer(std::string name, double health, Weapon* weapon, double agility, int penetration);
 
-    void attack(Character& target) override;
+    std::string attack(Character& character) override;
+    std::string attack(Character& character, Weapon& weapon) const;
+    std::string practice();
 
-    // Overload attack with distance factor
-    void attack(Character& target, double distance);
+    double getAgility() const;
+    void setAgility(double agility);
+    int getPenetration() const;
+    void setPenetration(int penetration);
+
+    std::string showStats() const override;
+    std::string showInventory() const override;
 };
 
-#endif // ARCHER_H
+#endif
