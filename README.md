@@ -1,83 +1,67 @@
 # RPG-simulator
 # 📚 Video Game Character Simulator (RPG Style)
 
-This project is a character simulator based on RPG-style video game logic. It allows you to apply Object-Oriented Programming (OOP) principles, such as inheritance, polymorphism, operator overloading, and exception handling, following good practices.
+This project is a character simulator based on role-playing game (RPG) logic. It allows you to apply key Object-Oriented Programming (OOP) principles such as inheritance, polymorphism, operator overloading, exception handling, and the use of abstract classes, all within an interactive environment.
 ### 🎮 **Context**
-In role-playing video games (RPGs), characters possess attributes, abilities, and items that define their behavior in combat. This simulator allows these interactions to be modeled, facilitating the understanding of key OOP concepts. It also simulates battles between characters by applying comparisons and status restrictions, such as health and weapon availability.
+In RPG video games, characters possess attributes, unique abilities, and an inventory of weapons. This simulator allows for the representation of these interactions, including combat turns, dynamic inventories, attack blocking, treasure hunting, and the use of special abilities. Each character's logic is designed to demonstrate differentiated behaviors through polymorphism.
 
 ### 📌 **Justification**
-This project is interesting because it allows you to observe how theoretical OOP concepts are applied in practical and engaging scenarios. It also encourages the writing of clean, reusable, and secure code, improving modular design and error handling skills.
+This project is valuable because it allows you to:
 
-### 🛠️ **Class Structure and Relationships**
+Observe how theoretical OOP concepts are applied in a practical and entertaining setting.
 
-#### **Abstract Class: Character**
-- Attributes:
-  - `# name: str`
-  - `# health: int`
-  - `# strength: int`
-  - `# inventory: list<Weapon*>`
-  - `# weapon: Weapon`
-- Methods:
-  - `+ attack(Character)` (abstracto)
-  - `+ equipWeapon(Weapon)`
-  - `+ heal()`
-  - `+ blockAttack()`
-  - `+ getName()`
-  - `+ setName(string)`
-  - `+ getHealth()`
-  - `+ setHealth(int)`
-  - `+ getStrength()`
-  - `+ setStrength(int)`
-  - `+ getInventory()`
-  - `+ setInventory(list<Weapon*>)`
-  - `+ getWeapon()`
-  - `+ setWeapon(Weapon)`
+Write clean, reusable, and modular code.
 
-**Description**: Abstract base class that defines attributes and behaviors common to all characters. This class is inherited by `Warrior`, `Mage`, and `Archer`.
+Practice object-oriented design, abstraction, composition, and error handling with your own classes.
 
-#### **Class: Warrior**
-- Inherits from: `Character`
-- Methods:
-  - `+ attack(Character)`
+### 🛠️ **General Structure**
 
-**Description**: This class inherits from `Character` and implements its own attack logic based on physical strength. It is an aggregator of the `Weapon` class.
+** 🧱 Character** (Abstract Class)
+Defines common behavior among characters and is the basis for the Warrior, Wizard, and Archer classes. Each subclass implements its own attack logic and unique abilities. It also manages health, inventory, and weapons.
 
-#### **Class: Wizard**
-- Inherits from: `Character`
-- Methods:
-  - `+ attack(Character)`
+** 🟥 Warrior**
+Specializes in physical combat. Its unique ability increases strength and leverages armor to increase damage. It is most effective with swords.
 
-**Description**: This class inherits from `Character` and implements attacks with increased magic damage. It is an add-on to the `Weapon` class.
+** 🔷 Wizard**
+Uses magical attacks and can increase its magical power with its special ability. It can only use staves to perform effective attacks.
 
-#### **Class: Archer**
-- Inherits from: `Character`
-- Methods:
-  - `+ attack(Character)`
+**🟢 Archer**
+Ranged attacker. Increases agility with its unique ability and is most effective with bows.
 
-**Description**: This class inherits from `Character` and implements ranged attacks. It is an add-on to the `Weapon` class.
+**⚔️ Weapon**
+Independent class that represents a weapon. Each weapon has a type (sword, staff, or bow) and a damage value. Weapons can be found in combat and added to the inventory.
+![RPG drawio](https://github.com/user-attachments/assets/f9a30c43-15de-42c8-81a5-64684b1a1e91)
 
-#### **Class: Weapon**
-- Attributes:
-  - `- name: str`
-  - `- damage: int`
-- Methods:
-  - `+ attack(Character)`
-  - `+ getName()`
-  - `+ setName(str)`
-  - `+ getDamage()`
-  - `+ setDamage(int)`
+### **🔁 Implemented Mechanics**
+- Turn-based combat system between player and enemy.
 
-**Description**: Represents the weapons that characters can use. This class does not inherit from any other class, but is related by aggregation to `Character`.
+- Interactive character creation.
 
-![RPG drawio](https://github.com/user-attachments/assets/c74440d9-1fc3-4931-8d6e-fe4207476d89)
+- Enemy selection from a group with polymorphic behavior.
 
+- Weapon selection and switching from the inventory.
 
-#### **Custom Exceptions**
-- `InsufficientHealthError`: Thrown when a character attempts to attack with low or no health.
-- `NoWeaponError`: Thrown when a character attempts to attack without having a weapon equipped.
+- Treasure hunts that grant random weapons.
 
-### 📈 **Implemented Features**
-- Inheritance and Polymorphism: The `Warrior`, `Mage`, and `Archer` classes inherit from `Character` and implement their own version of the `attack` method.
-- Exception Handling: Use methods to handle logic errors.
-- Aggregation: `Character` contains a list of `Weapon` items in its inventory.
+- Use of unique abilities based on class.
 
+- A blocking system that prevents damage if it was the opponent's last action.
+
+- Custom showStats() and showInventory() methods with detailed output based on character type.
+
+- Robust input validation: does not allow letters or out-of-range options.
+
+### **📈 Applied OOP Concepts**
+- Inheritance: The Warrior, Wizard, and Archer classes inherit from Character, reusing and specializing their behavior.
+
+- Polymorphism: Methods such as attack(), showStats(), and showInventory() are executed dynamically based on the object's actual type.
+
+- Pure virtual methods: attack(), showStats(), and showInventory() are defined as pure virtual in Character, forcing each subclass to implement its own version.
+
+- Method overriding: Each subclass redefines its own behavior for inherited methods such as attack() and showStats().
+
+- Operator overloading: The + operator is overloaded to allow weapons to be added to the character's inventory (Character& operator+(Weapon*)).
+
+- Aggregation: Character has a list of Weapon pointers, which can be equipped and queried.
+
+- Abstract classes: Character encapsulates common behaviors, leaving specific details to subclasses.
