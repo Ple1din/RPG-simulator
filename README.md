@@ -30,7 +30,8 @@ Ranged attacker. Increases agility with its unique ability and is most effective
 
 **⚔️ Weapon**
 Independent class that represents a weapon. Each weapon has a type (sword, staff, or bow) and a damage value. Weapons can be found in combat and added to the inventory.
-![RPG drawio](https://github.com/user-attachments/assets/f9a30c43-15de-42c8-81a5-64684b1a1e91)
+![RPG drawio (1)](https://github.com/user-attachments/assets/e71bbb83-7472-4e99-890c-5f244dc0b629)
+
 
 ### **🔁 Implemented Mechanics**
 - Turn-based combat system between player and enemy.
