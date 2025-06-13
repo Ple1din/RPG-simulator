@@ -49,8 +49,16 @@ int main() {
     Character* player = nullptr;
 
     // --- Character creation ---
-    std::cout << "Enter your character's name: ";
-    std::getline(std::cin, name);
+    do {
+        std::cout << "Enter your character's name: ";
+        std::getline(std::cin, name);
+
+        if (name.empty()) {
+            std::cout << "Error: The name cannot be empty. Please try again.\n";
+        }
+
+    } while (name.empty());
+
     std::cout << "Choose your class (1-Warrior, 2-Wizard, 3-Archer): ";
     choice = getValidatedInput(1, 3);
 
